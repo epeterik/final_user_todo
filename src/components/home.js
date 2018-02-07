@@ -8,7 +8,7 @@ export const Home = (props) => {
     return (
             <div className="columns small-12 padding-vert-medium">                
                 <h1>Home</h1>
-                <h3>Final Useres Todo Assignment</h3>
+                <h3>Final Users Todo Assignment</h3>
                 <p>Click the Users and Todos options at the top to be able to add and view users and todos.</p>
             </div>
     );
