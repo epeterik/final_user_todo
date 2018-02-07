@@ -8,7 +8,8 @@ import reducer from '../reducer/reducer'
 //set initial state
 const initialState = {
     userList: [],
-    itemList: []
+    itemList: [],
+    nextItemId: 1
 }
 
 export default createStore(

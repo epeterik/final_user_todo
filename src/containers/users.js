@@ -4,8 +4,6 @@ import '../ui-toolkit/css/nm-cx/main.css';
 //package imports
 import { connect } from "react-redux";
 import { 
-    BrowserRouter,
-    Link,
     Route
   } from 'react-router-dom';
 
@@ -96,7 +94,9 @@ class Users extends Component {
                     <div className="columns small-2 padding-top-medium">
                         <ul className="filter-nav vertical">
                             <h6>Users</h6>
-                            { this.props.usersList.length === 0 ? <div>Please Add Users</div> : this.props.usersList.map(this.mapUsersListForDisplay) }
+                            { this.props.usersList.length === 0 ? 
+                                <div>Please Add Users</div> : 
+                                this.props.usersList.map(this.mapUsersListForDisplay) }
                         </ul>
                     </div>
                     <div className="columns small-10 padding-vert-medium">   

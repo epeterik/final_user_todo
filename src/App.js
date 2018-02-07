@@ -7,9 +7,7 @@ import './custom.css';
 //package imports
 import { 
   BrowserRouter,
-  Link,
   Route,
-  Switch
   } from 'react-router-dom';
 
 //App imports
@@ -17,7 +15,7 @@ import { NavigationBar } from './components/navBar';
 import { AppHeader } from './components/header';
 import { Home } from './components/home';
 import Users from './containers/users';
-import { Todos } from './containers/todo';
+import Todo from './containers/todo';
 
 class App extends Component {
   render() {
@@ -30,7 +28,7 @@ class App extends Component {
             <div className="row padding-horiz-medium">
               <Route exact path='/' component={Home} />
               <Route path='/Users' component={Users} />
-              <Route path='/Todos' component={Todos} />
+              <Route path='/Todos' component={Todo} />
             </div>
           </div>
         </div>

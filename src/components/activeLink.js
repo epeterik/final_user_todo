@@ -2,10 +2,8 @@ import React from 'react';
 import '../ui-toolkit/css/nm-cx/main.css';
 
 import { 
-    BrowserRouter,
     Link,
     Route,
-    Switch
     } from 'react-router-dom';
 
 export const OldSchoolMenuLink = ({ label, to, activeOnlyWhenExact }) => (

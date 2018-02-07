@@ -1,16 +1,84 @@
-import React from 'react';
+import React, { Component } from 'react';
 import '../ui-toolkit/css/nm-cx/main.css';
 
-export const Todos = (props) => {
+//package imports
+import { connect } from "react-redux";
+import { 
+    BrowserRouter,
+    Link,
+    Route
+  } from 'react-router-dom';
+import TodoItem from './todoItem';
 
-    console.log("Entering Todos - props: ", props); //debug
+//App Imports
+import { ShowActiveSideBarListLink } from '../components/activeLink';
 
-    return (
-        <div className="columns small-12 padding-vert-medium">                
-            <h1>All To Do</h1>
-            <h3>Subheading for content below</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis facilisis lorem, vitae egestas leo. Nulla at augue vulputate, sodales diam rutrum, rhoncus felis. Mauris vitae lacus sodales, ullamcorper felis sed, sodales est. Nullam volutpat leo mi, non pellentesque ante porttitor at. Integer a diam massa. Suspendisse cursus velit mi, eget accumsan massa eleifend vel. Phasellus ut placerat quam. Integer eleifend enim et elit malesuada, commodo congue ipsum tempor. Nulla feugiat leo vel magna feugiat bibendum. Sed eget eros vulputate, laoreet ante sit amet, malesuada nulla. Aenean id maximus ante, ac mattis ex.</p>
-            <p>Integer vestibulum est in justo finibus faucibus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut massa justo, scelerisque vitae auctor at, sagittis tincidunt risus. Duis aliquet est ante, non congue lectus fermentum sit amet. Aliquam iaculis laoreet risus eget vulputate. Etiam sodales condimentum odio, scelerisque pulvinar velit varius quis. Duis eu ex velit. Sed vel massa accumsan, bibendum nulla id, interdum elit. Duis sollicitudin cursus felis, id molestie risus hendrerit vel. Nulla id nisi vitae erat eleifend vestibulum a tempor neque. Donec neque dui, maximus sed ultrices nec, vestibulum nec ex. Donec tempor condimentum nisl, ac finibus ligula facilisis at. Quisque eu dui lacus. Sed lobortis elit nec consequat fermentum. Maecenas a erat ut risus vestibulum consectetur. Aliquam erat volutpat.</p>
-        </div>
-    );
+class Todo extends Component {
+//export const Users = (props) => {
+    constructor(props) {
+        super(props);
+
+        //bindings
+        this.mapTodoListForDisplay = this.mapTodoListForDisplay.bind(this);
+
+    }
+
+    mapTodoListForDisplay = (todoItem, arrayIndex) => {
+        let localPath = this.props.match.path; 
+        console.log("Entering mapTodoListForDisplay - localPath: ", localPath);
+        console.log(todoItem);
+        console.log(todoItem.todoId);
+        return (
+            <li key={"todoListItem" + arrayIndex}><Link to={localPath + "/" + todoItem.todoId}>{todoItem.todoTitle + " - " + todoItem.userId}</Link></li>
+        );
+    }
+
+    render() {
+
+        //console.log("Entering Users - props: ", props); //debug
+        console.log("Users Props: ", this.props);
+        let localPath = this.props.match.path;
+        console.log(localPath);
+
+        return (
+            <div>
+                <div className="row">
+                    <div className="columns small-3 padding-top-medium">
+                        <h3>All Todos</h3>
+                    </div>
+                    <div className="columns small-9 padding-top-medium">
+                        &nbsp;
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="columns small-3 padding-top-medium" style={{paddingLeft: "30px", paddingBottom: "30px"}}>
+                        <ul className="filter-nav vertical">
+                            { this.props.itemsList.length === 0 ? 
+                                <div>Please Add Users Todos</div> : 
+                                this.props.itemsList.map(this.mapTodoListForDisplay) }
+                        </ul>
+                    </div>
+                    <div className="columns small-9 padding-top-medium">
+                        <Route path={localPath + "/:todoID"} component={TodoItem}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        itemsList: state.itemList
+    };
+  };
+  
+  const mapDispatchToProps = (dispatch) => {
+      return {
+        /*addNewUser: (user) => {
+              dispatch(addNewUser(user));
+         }*/
+      };
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Todo);

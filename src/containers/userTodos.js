@@ -66,7 +66,10 @@ class UserTodos extends Component {
         let localUserId = this.props.match.params.userID
 
         //Call store function/action to add new user
-        this.props.addUserTodo(localUserId, this.state.todoTitleEntry, this.state.todoContentEntry);
+        this.props.addUserTodo(localUserId, 
+            this.state.todoTitleEntry, 
+            this.state.todoContentEntry,
+            this.props.nextItemId);
 
         //user has been added, clear out current input
         this.setState({todoTitleEntry: '',
@@ -141,14 +144,15 @@ class UserTodos extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        itemsList: state.itemList
+        itemsList: state.itemList,
+        nextItemId: state.nextItemId
     };
   };
   
   const mapDispatchToProps = (dispatch) => {
       return {
-        addUserTodo: (userId, todoTitle, todoContent) => {
-              dispatch(addUserTodo(userId, todoTitle, todoContent));
+        addUserTodo: (userId, todoTitle, todoContent, todoId) => {
+              dispatch(addUserTodo(userId, todoTitle, todoContent, todoId));
          }
       };
   };

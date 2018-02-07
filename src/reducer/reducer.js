@@ -16,7 +16,8 @@ export const reducer = (state, action) => {
         case ADD_USER_TODO: 
             console.log("reducer - ADD_USER_TODO"); //debug
             return {...state, 
-                itemList: state.itemList.concat(action.payload)}; //using array.concat to generate new array without mutating the source data elements
+                itemList: state.itemList.concat(action.payload), //using array.concat to generate new array without mutating the source data elements
+                nextItemId: state.nextItemId + 1}; //increment to next todo ID
         //break;
         default: //should always have - code first - should always return current state
             console.log("reducer - default"); //debug
